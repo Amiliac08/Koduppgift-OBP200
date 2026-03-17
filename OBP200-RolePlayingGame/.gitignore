@@ -1,0 +1,52 @@
+# Build results
+
+bin/
+obj/
+
+# Rider
+
+.idea/
+*.sln.iml
+
+# User-specific files
+
+*.user
+*.userprefs
+*.csproj.user
+
+# JetBrains Rider cache
+
+.idea/*
+!.idea/.gitignore
+!.idea/codeStyles
+!.idea/inspectionProfiles
+
+# .NET
+
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs
+
+*test.log
+.log
+
+# OS generated files
+
+.DS_Store
+Thumbs.db
+
+# Visual Studio (if project opened there)
+
+.vs/
+
+# NuGet
+
+*.nupkg
+packages/
+
+# Temporary files
+
+*.tmp
+*.temp
