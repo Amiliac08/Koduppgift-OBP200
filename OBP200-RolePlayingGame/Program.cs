@@ -269,7 +269,7 @@ class Program
 
             // Fiendens tur
             int enemyDamage = CalculateEnemyDamage(enemyAtk, player);
-            player.ApplyDamageToPlayer(enemyDamage);
+            player.TakeDamage(enemyDamage);
             Console.WriteLine($"{enemy[1]} anfaller och gör {enemyDamage} skada!");
         }
 

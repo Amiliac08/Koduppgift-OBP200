@@ -5,7 +5,7 @@ public abstract class Player : Character
     // Random
     static Random Rng = new Random();
     
-    public string ClassName { get; private set; }
+    public string ClassName { get; }
     public int MaxHp { get; private set; }
     public int Gold { get; protected set; }
     public int Xp { get; private set; }
@@ -130,7 +130,7 @@ public abstract class Player : Character
         return Math.Max(0, specialDmg);
     }
     
-    public void ApplyDamageToPlayer(int dmg)
+    public void TakeDamage(int dmg)
     {
         //int hp = ParseInt(Player[2], 0);
         Hp -= Math.Max(0, dmg);

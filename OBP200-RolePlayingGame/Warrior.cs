@@ -16,7 +16,7 @@ public class Warrior : Player
         //int atk = ParseInt(Player[4], 5);
             
         specialDmg = Math.Max(2, Attack + 3 - enemyDef);
-        ApplyDamageToPlayer(2); // självskada
+        TakeDamage(2); // självskada
         
         
         return Math.Max(0, specialDmg);
