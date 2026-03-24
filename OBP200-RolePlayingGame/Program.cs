@@ -496,7 +496,7 @@ class Program
     {
         //var inv = (Player[10] ?? "");
         //if (string.IsNullOrWhiteSpace(inv))
-        if(player.Inventory.Contains(item))
+        if(player.Inventory.Count == 0)
         {
             Console.WriteLine("Du har inga föremål att sälja.");
             return;

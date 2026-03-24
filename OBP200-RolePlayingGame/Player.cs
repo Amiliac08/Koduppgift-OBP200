@@ -12,7 +12,7 @@ public abstract class Player : Character
     public int Level { get; private set; }
     public int Potions { get; private set; }
 
-    public List<string> Inventory { get; } = new List<string>();
+    public List<string> Inventory { get; } 
 
     public Player(string name, int hp, int attack, int defence, string classname, int maxHp, int gold, int xp, int level, int potions) : base(name, hp, attack, defence)
     {

@@ -2,7 +2,7 @@
 
 public class Character
 {
-    public string Name { get; protected set; }
+    public string Name { get; }
     public int Hp { get; protected set; }
     public int Attack { get; protected set; }
     public int Defence { get; protected set; }
@@ -13,11 +13,6 @@ public class Character
         Hp = hp;
         Attack = attack;
         Defence = defence;
-    }
-
-    protected virtual void CalculateDamage()
-    {
-        
     }
 
 }
