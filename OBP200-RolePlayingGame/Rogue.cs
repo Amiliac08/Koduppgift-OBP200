@@ -18,7 +18,7 @@ public class Rogue : Player
         if (Rng.NextDouble() < 0.5)
         {
             Console.WriteLine("Rogue utför en lyckad Backstab!");
-            //int atk = ParseInt(Player[4], 5);
+            
             specialDmg = Math.Max(4, Attack + 6);
         }
         else

@@ -15,9 +15,9 @@ public class Mage : Player
         if (Gold >= 3)
         {
             Console.WriteLine("Mage kastar Fireball!");
-            //Player[6] = (gold - 3).ToString();
+            
             Gold -= 3;
-            //int atk = ParseInt(Player[4], 5);
+            
             specialDmg = Math.Max(3, Attack + 5 - (enemyDef / 2));
         }
         else

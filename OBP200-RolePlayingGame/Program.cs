@@ -7,11 +7,7 @@ class Program
 {
     // ======= Globalt tillstånd  =======
 
-    // Spelarens "databas": alla värden som strängar
-    // index: 0 Name, 1 Class, 2 HP, 3 MaxHP, 4 ATK, 5 DEF, 6 GOLD, 7 XP, 8 LEVEL, 9 POTIONS, 10 INVENTORY (semicolon-sep)
-    //static string[] Player = new string[11];
     
-
     // Rum: [type, label]
     // types: battle, treasure, shop, rest, boss
     static List<string[]> Rooms = new List<string[]>();
@@ -29,6 +25,7 @@ class Program
 
     static void Main(string[] args)
     {
+        
         Console.OutputEncoding = Encoding.UTF8;
         InitEnemyTemplates();
 
@@ -78,51 +75,31 @@ class Program
         Console.Write("Val: ");
         var k = (Console.ReadLine() ?? "").Trim();
 
-        //string cls = "Warrior";
-        //int hp = 0, maxhp = 0, atk = 0, def = 0;
-        //int potions = 0, gold = 0;
+        
 
         Player player;
         
+        // Val av spelare
         switch (k)
         {
-            case "1": // Warrior: tankig
-                //cls = "Warrior";
-                //maxhp = 40; hp = 40; atk = 7; def = 5; potions = 2; gold = 15;
+            case "1": 
                 player = new Warrior(name);
                 break;
-            case "2": // Mage: hög damage, låg def
-                //cls = "Mage";
-                //maxhp = 28; hp = 28; atk = 10; def = 2; potions = 2; gold = 15;
+            
+            case "2": 
                 player = new Mage(name);
                 break;
                 
-            case "3": // Rogue: krit-chans
-                //cls = "Rogue";
-                //maxhp = 32; hp = 32; atk = 8; def = 3; potions = 3; gold = 20;
+            case "3": 
                 player = new Rogue(name);
                 break;
                 
             default:
-                //cls = "Warrior";
-                //maxhp = 40; hp = 40; atk = 7; def = 5; potions = 2; gold = 15;
                 player = new Warrior(name);
                 break;
                 
         }
-
-        // Fyll player-array
-        //Player[0] = name;
-        //Player[1] = cls;
-        //Player[2] = hp.ToString();
-        //Player[3] = maxhp.ToString();
-        //Player[4] = atk.ToString();
-        //Player[5] = def.ToString();
-        //Player[6] = gold.ToString();
-        //Player[7] = "0";   // XP
-        //Player[8] = "1";   // LEVEL
-        //Player[9] = potions.ToString();
-        //Player[10] = "Wooden Sword;Cloth Armor"; // inventory som semicolon-separerad sträng
+        
 
         // Initiera karta (linjärt äventyr)
         Rooms.Clear();
@@ -325,9 +302,7 @@ class Program
     static int CalculatePlayerDamage(int enemyDef, Player player)
     {
         
-        //int atk = ParseInt(Player[4], 5);
         int atk = player.Attack;
-        //string cls = Player[1] ?? "Warrior";
         string cls = player.ClassName;
 
         // Beräkna grundskada
@@ -356,7 +331,7 @@ class Program
 
     static int CalculateEnemyDamage(int enemyAtk, Player player)
     {
-        //int def = ParseInt(Player[5], 0);
+        
         int roll = Rng.Next(0, 3);
 
         int dmg = Math.Max(1, enemyAtk - (player.Defence / 2)) + roll;
@@ -371,7 +346,7 @@ class Program
     static bool TryRunAway(Player player)
     {
         // Flyktschans baserad på karaktärsklass
-        //string cls = Player[1] ?? "Warrior";
+        
         double chance = 0.25;
         if (player.ClassName == "Rogue") chance = 0.5;
         if (player.ClassName == "Mage") chance = 0.35;
@@ -380,7 +355,6 @@ class Program
     
     static bool IsPlayerDead(Player player)
     {
-        //return ParseInt(Player[2], 0) <= 0;
         if (player.Hp <= 0)
         {
             return true;
@@ -397,9 +371,7 @@ class Program
             string item = "Minor Gem";
             if (enemyName.Contains("Urdraken")) item = "Dragon Scale";
 
-            //var inv = (Player[10] ?? "").Trim();
-            //if (string.IsNullOrEmpty(inv)) Player[10] = item;
-            //else Player[10] = inv + ";" + item;
+            
             player.Inventory.Add(item);
             
 
@@ -422,8 +394,7 @@ class Program
         {
             var items = new[] { "Iron Dagger", "Oak Staff", "Leather Vest", "Healing Herb" };
             string found = items[Rng.Next(items.Length)];
-            //var inv = (Player[10] ?? "").Trim();
-            //Player[10] = string.IsNullOrEmpty(inv) ? found : (inv + ";" + found);
+            
             player.Inventory.Add(found);
             Console.WriteLine($"Du plockar upp: {found}");
         }
@@ -446,17 +417,14 @@ class Program
 
             if (val == "1")
             {
-                //TryBuy(10, () => player.Potions = (ParseInt(Player[9], 0) + 1).ToString(), "Du köper en dryck.", player);
                 TryBuy(10, () => player.AddPotion(), "Du köper en dryck.", player);
             }
             else if (val == "2")
             {
-                //TryBuy(25, () => Player[4] = (ParseInt(Player[4], 0) + 2).ToString(), "Du köper ett bättre vapen.");
                 TryBuy(25, () => player.AddWeapon(), "Du köper ett bättre vapen.", player);
             }
             else if (val == "3")
             {
-                //TryBuy(25, () => Player[5] = (ParseInt(Player[5], 0) + 2).ToString(), "Du köper bättre rustning.");
                 TryBuy(25, () => player.AddArmor(), "Du köper bättre rustning.", player);
             }
             else if (val == "4")
@@ -478,11 +446,9 @@ class Program
     
     static void TryBuy(int cost, Action apply, string successMsg, Player player)
     {
-        //int gold = ParseInt(Player[6], 0);
+        
         if (player.TrySpendGold(cost))
         {
-            //Player[6] = (gold - cost).ToString();
-            
             apply();
             Console.WriteLine(successMsg);
         }
@@ -494,27 +460,16 @@ class Program
 
     static void SellMinorGems(Player player, string item)
     {
-        //var inv = (Player[10] ?? "");
-        //if (string.IsNullOrWhiteSpace(inv))
-        if(player.Inventory.Count == 0)
-        {
-            Console.WriteLine("Du har inga föremål att sälja.");
-            return;
-        }
-
-        //var items = inv.Split(';').Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
-        //int count = items.Count(x => x == "Minor Gem");
+        
         int count = player.Inventory.Count(x => x == "Minor Gem");
-        //if (count == 0)
+       
         if(!player.Inventory.Contains("Minor Gem"))
         {
             Console.WriteLine("Inga 'Minor Gem' i väskan.");
             return;
         }
-
-        //items = items.Where(x => x != "Minor Gem").ToList();
-        //Player[10] = items.Count == 0 ? "" : string.Join(";", items);
-        player.Inventory.Count(x => x == "Minor Gem");
+        
+        player.Inventory.RemoveAll(x => x == "Minor Gem");
 
         player.AddPlayerGold(count * 5);
         Console.WriteLine($"Du säljer {count} st Minor Gem för {count * 5} guld.");
@@ -526,8 +481,7 @@ class Program
     static void ShowStatus(Player player)
     {
         Console.WriteLine($"[{player.Name} | {player.ClassName}] HP {player.Hp}/{player.MaxHp} ATK {player.Attack} DEF {player.Defence} LVL {player.Level} XP {player.Xp} Guld {player.Gold} Drycker {player.Potions}");
-        //Console.WriteLine($"[{Player[0]} | {Player[1]}]  HP {Player[2]}/{Player[3]}  ATK {Player[4]}  DEF {Player[5]}  LVL {Player[8]}  XP {Player[7]}  Guld {Player[6]}  Drycker {Player[9]}");
-        //var inv = (Player[10] ?? "");
+        
         if (player.Inventory != null)
         {
             foreach (var item in player.Inventory)
@@ -535,10 +489,6 @@ class Program
                 Console.WriteLine(item);
             }
         }
-        //if (!string.IsNullOrWhiteSpace(inv))
-        //{
-          //  Console.WriteLine($"Väska: {inv}");
-        //}
     }
     
     // ======= Hjälpmetoder =======
